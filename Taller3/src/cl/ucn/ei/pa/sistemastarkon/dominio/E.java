@@ -52,5 +52,9 @@ public class E extends Entrega {
         this.valor = (peso/1000)*(largo*ancho*prof)*50;
         return this.valor;
     }
+
+    public String toStringHija(){
+        return " Valor: "+getValor()+"\n Tipo: Encomienda";
+    }
    
 }

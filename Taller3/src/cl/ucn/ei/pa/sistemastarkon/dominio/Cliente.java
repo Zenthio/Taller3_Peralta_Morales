@@ -1,18 +1,40 @@
 package cl.ucn.ei.pa.sistemastarkon.dominio;
 
+import cl.ucn.ei.pa.sistemastarkon.logica.*;
+
 public class Cliente {
     private String rut;
     private String nombre;
     private String apellido;
-    private int saldo;
+    private double saldo;
     private String ciudad;
+    private ListaEntrega entregasRecibidas;
+    private ListaEntrega entregasEnviadas; 
 
-    public Cliente(String rut, String nombre, String apellido, int saldo, String ciudad) {
+    public Cliente(String rut, String nombre, String apellido, double saldo, String ciudad) {
         this.rut = rut;
         this.nombre = nombre;
         this.apellido = apellido;
         this.saldo = saldo;
         this.ciudad = ciudad;
+        entregasRecibidas = new ListaEntrega();
+        entregasEnviadas = new ListaEntrega();
+    }
+
+    public ListaEntrega getEntregasRecibidas() {
+        return this.entregasRecibidas;
+    }
+
+    public void setEntregasRecibidas(ListaEntrega entregasRecibidas) {
+        this.entregasRecibidas = entregasRecibidas;
+    }
+
+    public ListaEntrega getEntregasEnviadas() {
+        return this.entregasEnviadas;
+    }
+
+    public void setEntregasEnviadas(ListaEntrega entregasEnviadas) {
+        this.entregasEnviadas = entregasEnviadas;
     }
 
     public String getRut() {
@@ -39,11 +61,11 @@ public class Cliente {
         this.apellido = apellido;
     }
 
-    public int getSaldo() {
+    public double getSaldo() {
         return this.saldo;
     }
 
-    public void setSaldo(int saldo) {
+    public void setSaldo(double saldo) {
         this.saldo = saldo;
     }
 
@@ -54,4 +76,18 @@ public class Cliente {
     public void setCiudad(String ciudad) {
         this.ciudad = ciudad;
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " rut='" + getRut() + "'" +
+            ", nombre='" + getNombre() + "'" +
+            ", apellido='" + getApellido() + "'" +
+            ", saldo='" + getSaldo() + "'" +
+            ", ciudad='" + getCiudad() + "'" +
+            ", entregasRecibidas='" + getEntregasRecibidas() + "'" +
+            ", entregasEnviadas='" + getEntregasEnviadas() + "'" +
+            "}";
+    }
+
 }

@@ -1,11 +1,18 @@
 package cl.ucn.ei.pa.sistemastarkon.dominio;
+import cl.ucn.ei.pa.sistemastarkon.logica.*;
 
 public class Localizacion{
 
     private String nombre;
+    private int ganancia;
+    private ListaEntrega entregasEnviadas;
+    private ListaEntrega entregasRecibidas;
 
     public Localizacion(String nombre){
+        ganancia = 0;
         this.nombre = nombre;
+        entregasEnviadas = new ListaEntrega();
+        entregasRecibidas = new ListaEntrega();
     }
 
     public String getNombre() {
@@ -16,4 +23,16 @@ public class Localizacion{
         this.nombre = nombre;
     }
 
+    public int getGanancia(){
+        return this.ganancia;
+    }
+
+    public void setGanancia(int ganancia){
+        this.ganancia = ganancia;
+    }
+
+    public String entregasLocalizacion(){
+        String retorno = "Localizacion: \n"+getNombre()+ "realizó "+entregasEnviadas.getSize()+" y recibió "+entregasRecibidas.getSize()+"\n";
+        return retorno;
+    }
 }

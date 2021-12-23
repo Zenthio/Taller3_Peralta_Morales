@@ -48,5 +48,12 @@ public abstract class Entrega {
     public void setValor(double valor) {
         this.valor = valor;
     }
+
+    public abstract String toStringHija();
+
+    @Override
+    public String toString() {
+        return " Código: "+getCodigo()+"\n Rut Remitente: "+getRutRemitente()+"\n Rut Destinatario: "+getRutDestinatario()+"\n Valor: "+getValor();
+    }
     
 }

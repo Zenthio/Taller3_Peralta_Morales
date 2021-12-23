@@ -2,17 +2,16 @@ package cl.ucn.ei.pa.sistemastarkon.dominio;
 
 public class D extends Entrega{
     
-    private int peso;
-    private int grosor;
+    private double peso;
+    private double grosor;
 
-    public D(int codigo, String rutRemitente, String rutDestinatario, int peso, int grosor) {
-
+    public D(int codigo, String rutRemitente, String rutDestinatario, double peso, double grosor){
         super(codigo, rutRemitente, rutDestinatario);
         this.peso = peso;
         this.grosor = grosor;
     }
 
-    public int getPeso() {
+    public double getPeso() {
         return this.peso;
     }
 
@@ -20,7 +19,7 @@ public class D extends Entrega{
         this.peso = peso;
     }
 
-    public int getGrosor() {
+    public double getGrosor() {
         return this.grosor;
     }
 
@@ -32,6 +31,11 @@ public class D extends Entrega{
     public double calcularValor() {
         this.valor = (peso/1000)*grosor*100;
         return valor;
+    }
+
+    @Override
+    public String toStringHija(){
+        return " Valor: "+getValor()+"\n Tipo: Documento";
     }
 
 }

@@ -43,5 +43,10 @@ public class V extends Entrega {
         }
         return 0;
     }
+
+    @Override
+    public String toStringHija() {
+        return " Valor: "+getValor()+"\n Tipo: Valija";
+    }
  
 }
