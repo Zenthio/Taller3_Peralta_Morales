@@ -32,7 +32,7 @@ public class Localizacion{
     }
 
     public String entregasLocalizacion(){
-        String retorno = "Localizacion: \n"+getNombre()+ "realizó "+entregasEnviadas.getSize()+" y recibió "+entregasRecibidas.getSize()+"\n";
+        String retorno = "La oficina en "+getNombre()+ " realizó "+entregasEnviadas.getSize()+" envíos y recibió "+entregasRecibidas.getSize()+" envios\n";
         return retorno;
     }
 

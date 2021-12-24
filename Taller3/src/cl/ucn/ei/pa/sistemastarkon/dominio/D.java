@@ -3,12 +3,17 @@ package cl.ucn.ei.pa.sistemastarkon.dominio;
 public class D extends Entrega{
     
     private int peso;
+    private double pesoKg;
     private int grosor;
+    private double grosorCm;
 
     public D(int codigo, String rutRemitente, String rutDestinatario, int peso, int grosor){
         super(codigo, rutRemitente, rutDestinatario);
         this.peso = peso;
+        this.pesoKg = (peso/1000);
         this.grosor = grosor;
+        this.grosorCm = (grosor/10);
+        calcularValor();
     }
 
     public int getPeso() {
@@ -29,13 +34,13 @@ public class D extends Entrega{
 
     @Override
     public double calcularValor() {
-        this.valor = (peso/1000)*grosor*100;
+        this.valor = (pesoKg)*(grosorCm)*100;
         return valor;
     }
 
     @Override
     public String toStringHija(){
-        return " Valor: "+getValor()+"\n Tipo: Documento";
+        return "Codigo: "+getCodigo()+" | Valor: "+getValor()+" | Tipo: Documento\n";
     }
 
     @Override

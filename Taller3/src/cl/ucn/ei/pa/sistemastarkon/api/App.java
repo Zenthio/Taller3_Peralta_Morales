@@ -8,9 +8,10 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 
 import cl.ucn.ei.pa.sistemastarkon.logica.*;
+import cl.ucn.ei.pa.sistemastarkon.utils.RutUtility;
 
 public class App {
-    
+    //QUEDA ARREGLAR LAS GANANCIAS Y EL ENTREGASCLIENTE, ADEMAS DE SEGUIR PROBANDO LOS METODOS
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         SistemaStarkon sys = new SistemaStarkonImpl();
@@ -19,7 +20,6 @@ public class App {
         lecturaEntregas(sys);
         System.out.println(sys.obtenerDatosLocalizacion() +"\n"+sys.obtenerDatosCliente()+"\n"+sys.obtenerDatosEntrega());
         menu(sys,scanner);
-        
     }
 
     public static void lecturaEntregas(SistemaStarkon sys) {
@@ -31,34 +31,39 @@ public class App {
                 int codigo = Integer.parseInt(datos[0]);
                 String tipo = datos[1];
                 String rutR = datos[2];
+                rutR = RutUtility.quitarFormatoRut(rutR);
                 String rutD = datos[3];
+                rutD = RutUtility.quitarFormatoRut(rutD);
                 if (tipo.equals("V")){                  
-                        String material = datos[4];
-                        int peso = Integer.parseInt(datos[5]);
-                        if (sys.ingresarEntregaV(codigo, rutR, rutD, material, peso)){
-                            System.out.println("La entrega con código "+codigo+" se añadió correctamente");
-                        }
-                    } else if (tipo.equals("D")){
-                        int peso = Integer.parseInt(datos[4]);
-                        int grosor = Integer.parseInt(datos[5]);
-                        if (sys.ingresarEntregaD(codigo, rutR, rutD, peso, grosor)){
-                            System.out.println("La entrega con código "+codigo+" se añadió correctamente");
-                        }
+                    String material = datos[4];
+                    int peso = Integer.parseInt(datos[5]);
+                    System.out.println("Material: "+material+", Peso: "+peso);
+                    sys.ingresarEntregaV(codigo, rutR, rutD, material, peso);
+                    System.out.println("La entrega con código "+codigo+" se añadió correctamente");
+                        
+                } else if (tipo.equals("D")){
+                    int peso = Integer.parseInt(datos[4]);
+                    int grosor = Integer.parseInt(datos[5]);
+                    sys.ingresarEntregaD(codigo, rutR, rutD, peso, grosor);
+                    System.out.println("La entrega con código "+codigo+" se añadió correctamente");
+                        
                     
                 } else {
                     int peso = Integer.parseInt(datos[4]);
                     int largo = Integer.parseInt(datos[5]);
                     int ancho = Integer.parseInt(datos[6]);
                     int prof = Integer.parseInt(datos[7]);
-                    if (sys.ingresarEntregaE(codigo, rutR, rutD, peso, largo, ancho, prof)){
-                        System.out.println("La entrega con código "+codigo+" se añadió correctamente");
-                    }
+                    sys.ingresarEntregaE(codigo, rutR, rutD, peso, largo, ancho, prof);
+                    System.out.println("La entrega con código "+codigo+" se añadió correctamente");
+                    
                 }
             }
+            
         } catch (IOException | NullPointerException e){
-            System.out.println(e.getMessage());
+               System.out.println(e.getMessage());
+            }
         }
-    }
+
 
     public static void lecturaLocalizaciones(SistemaStarkon sys) {
         try {
@@ -67,9 +72,9 @@ public class App {
                 String line = arch.nextLine();
                 String[] datos = line.split(",");
                 String nombre = datos[0];
-                if (sys.ingresarLocalizacion(nombre)){
+                sys.ingresarLocalizacion(nombre);
                     System.out.println("La localización "+nombre+" se añadió correctamente");
-                }
+                
             }
         } catch (IOException | NullPointerException e){
             System.out.println(e.getMessage());
@@ -83,13 +88,14 @@ public class App {
                 String line = arch.nextLine();
                 String[] datos = line.split(",");
                 String rut = datos[0];
+                rut = RutUtility.quitarFormatoRut(rut);
                 String nombre = datos[1];
                 String apellido = datos[2];
                 int saldo = Integer.parseInt(datos[3]);
                 String ciudad = datos[4];
-                if (sys.ingresarCliente(rut, nombre, apellido, saldo, ciudad)){
+                sys.ingresarCliente(rut, nombre, apellido, saldo, ciudad);
                     System.out.println("El cliente con rut "+rut+" se añadió correctamente");
-                }
+                
                 
             }
         } catch (IOException | NullPointerException e){
@@ -129,6 +135,7 @@ public class App {
             try {
                 System.out.print("Ingrese su opción: ");
                 opcion = Integer.parseInt(scanner.nextLine());
+                System.out.println();
                 switch (opcion) {
                     case 1:
                     try {
@@ -181,6 +188,7 @@ public class App {
             try {
                 System.out.print("Ingrese su opción: ");
                 opcion = Integer.parseInt(scanner.nextLine());
+                System.out.println();
                 switch (opcion) {
                     case 1:
                     try {

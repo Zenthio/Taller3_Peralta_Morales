@@ -4,11 +4,14 @@ public class V extends Entrega {
 
     private String material;
     private int peso;
+    private double pesoKg;
 
     public V(int codigo, String rutRemitente, String rutDestinatario, String material, int peso) {
         super(codigo, rutRemitente, rutDestinatario);
         this.material = material;
         this.peso = peso;
+        this.pesoKg = (peso/1000);
+        calcularValor();
         
     }
 
@@ -30,23 +33,23 @@ public class V extends Entrega {
 
     @Override
     public double calcularValor() {
-        if (this.material.equals("Cuero")){
-            this.valor = 200*(peso/1000)*150;
+        if (material.equals("Cuero")){
+            this.valor = 200*(pesoKg)*150;
         } else {
-            if (this.material.equals("Plastico")){
-                this.valor = 150*(peso/1000)*150;
+            if (material.equals("Plastico")){
+                this.valor = 150*(pesoKg)*150;
             } else {
-                if (this.material.equals("Tela")){
-                    this.valor = 100*(peso/1000)*150;
+                if (material.equals("Tela")){
+                    this.valor = 100*(pesoKg)*150;
                 }
             }
         }
-        return 0;
+        return this.valor;
     }
 
     @Override
     public String toStringHija() {
-        return " Valor: "+getValor()+"\n Tipo: Valija";
+        return "Codigo: "+getCodigo()+" | Valor: "+getValor()+" | Tipo: Valija\n";
     }
  
     @Override

@@ -5,12 +5,11 @@ import cl.ucn.ei.pa.sistemastarkon.dominio.*;
 public class ListaEntrega {
     
     private NodoEntrega first;
-    private NodoEntrega last;
     private int size;
 
     public ListaEntrega(){
         first = null;
-        last = null;
+        
         size = 0;
     }
 
@@ -20,14 +19,6 @@ public class ListaEntrega {
 
     public void setFirst(NodoEntrega first) {
         this.first = first;
-    }
-
-    public NodoEntrega getLast() {
-        return this.last;
-    }
-
-    public void setLast(NodoEntrega last) {
-        this.last = last;
     }
 
     public int getSize() {
@@ -65,7 +56,7 @@ public class ListaEntrega {
         last = nuevoNodo;
         return true;
     }
-    */
+    
     public boolean eliminarClaveCircular(int codigo){
         NodoEntrega actual = first;
         NodoEntrega anterior = last;
@@ -122,96 +113,76 @@ public class ListaEntrega {
         if (isEmpty()){
             first = nuevoNodo;
             first.setNext(first);
-            nuevoNodo.setPrevio(last);
-            last = nuevoNodo;
+            first.setPrevio(first);
             size++;
         } else {
-            last.setNext(nuevoNodo);
+            NodoEntrega current = first.getPrevio();
+            nuevoNodo.setPrevio(current);
+            current.setNext(nuevoNodo);
+            first.setPrevio(nuevoNodo);
             nuevoNodo.setNext(first);
-            nuevoNodo.setPrevio(last);
-            last = nuevoNodo;
-            first.setPrevio(last);
             size++;
         }
         return true;
     }
 
     public Entrega buscarNodoR(String rut){
-        NodoEntrega current = last;
-        boolean encontrado = false;
+        NodoEntrega current = first;
         do{
             if (current.getEntrega().getRutRemitente().equals(rut) || current.getEntrega().getRutDestinatario().equals(rut)){
-                encontrado = true;
-                break;
+                return current.getEntrega();
             }
-            current = current.getPrevio();
-        } while (current != last);
-        if (encontrado){
-            return current.getEntrega();
-        } else {
-            return null;
-        }
+            current = current.getNext();
+        } while (current != first);
+        return null;
 
     }
 
     public Entrega buscarNodoC(int codigo){
-        NodoEntrega current = last;
-        boolean encontrado = false;
+        NodoEntrega current = first;
+        
         do{
             if (current.getEntrega().getCodigo() == codigo){
-                encontrado = true;
-                break;
+                return current.getEntrega();
             }
-            current = current.getPrevio();
-        } while (current != last);
-        if (encontrado){
-            return current.getEntrega();
-        } else {
-            return null;
-        }
+            current = current.getNext();
+        } while (current != first);
+        return null;
 
     }
 
     public int buscarNodoI(int codigo){
-        NodoEntrega current = last;
-        boolean encontrado = false;
+        NodoEntrega current = first;
         int pos = 0;
         do{
             if (current.getEntrega().getCodigo() == codigo){
-                encontrado = true;
-                break;
+                return pos;
             }
             pos++;
-            current = current.getPrevio();
-        } while (current != last);
-        if (encontrado){
-            return pos;
-        } else {
-            return -1;
-        }
-
+            current = current.getNext();
+        } while (current != first);
+        return -1;
     }
 
     public Entrega buscarINodo(int pos){
         NodoEntrega current = first;
-        Entrega found = null;
         int cont = 0;
     do{
         if (cont == pos){
-            found = current.getEntrega();
-            break;
+            return current.getEntrega();
         }
         current = current.getNext();
         cont++;
     } while (current != first);
-        return found;
+        return null;
     }
 
     public String entregas(){
         NodoEntrega current = first;
         String retorno = "";
         do{
-            retorno += current.getEntrega().toString()+"\n";
+            Entrega e = current.getEntrega();
+            retorno += e.toString()+"\n";
             current = current.getNext();
         } while (current != first);
         return retorno;

@@ -1,6 +1,0 @@
-20.718.653-8,Nicolas,Gonzalez,500000,Coquimbo
-21.004.634-8,Nicolas,Peralta,1000000,Rancagua
-19.671.250-K,Diego,Maradona,50,La Serena
-1.111.111-1,Pablo,Rios,70000,Ovalle
-5.936.153-4,Veronica,Alfaro,149000,Combarbala
-7.174.487-5,Jhonathan,Alvarez,9999999,Santiago

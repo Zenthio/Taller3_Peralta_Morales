@@ -6,13 +6,12 @@ public abstract class Entrega {
     //TIPO DE ENTREGA IRIA AQUI
     private String rutRemitente;
     private String rutDestinatario;
-    protected int valor;
+    protected double valor;
 
     protected Entrega(int codigo, String rutRemitente, String rutDestinatario){
         this.codigo = codigo;
         this.rutRemitente = rutRemitente;
         this.rutDestinatario = rutDestinatario;
-        this.valor = 0;
     }
 
     public abstract double calcularValor();
@@ -41,11 +40,11 @@ public abstract class Entrega {
         this.rutDestinatario = rutDestinatario;
     }
 
-    public int getValor() {
+    public double getValor() {
         return this.valor;
     }
 
-    public void setValor(int valor) {
+    public void setValor(double valor) {
         this.valor = valor;
     }
 
