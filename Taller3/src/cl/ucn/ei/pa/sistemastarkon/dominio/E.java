@@ -2,12 +2,12 @@ package cl.ucn.ei.pa.sistemastarkon.dominio;
 
 public class E extends Entrega {
 
-    private double peso;
-    private double largo;
-    private double ancho;
-    private double prof;
+    private int peso;
+    private int largo;
+    private int ancho;
+    private int prof;
 
-    public E(int codigo, String rutRemitente, String rutDestinatario, double peso, double largo, double ancho, double prof){
+    public E(int codigo, String rutRemitente, String rutDestinatario, int peso, int largo, int ancho, int prof){
         super(codigo, rutRemitente, rutDestinatario);
         this.peso = peso;
         this.largo = largo;
@@ -15,7 +15,7 @@ public class E extends Entrega {
         this.prof = prof;
     }
 
-    public double getPeso() {
+    public int getPeso() {
         return this.peso;
     }
 
@@ -23,7 +23,7 @@ public class E extends Entrega {
         this.peso = peso;
     }
 
-    public double getLargo() {
+    public int getLargo() {
         return this.largo;
     }
 
@@ -31,7 +31,7 @@ public class E extends Entrega {
         this.largo = largo;
     }
 
-    public double getAncho() {
+    public int getAncho() {
         return this.ancho;
     }
 
@@ -39,7 +39,7 @@ public class E extends Entrega {
         this.ancho = ancho;
     }
 
-    public double getProf() {
+    public int getProf() {
         return this.prof;
     }
 
@@ -57,4 +57,8 @@ public class E extends Entrega {
         return " Valor: "+getValor()+"\n Tipo: Encomienda";
     }
    
+    @Override
+    public String toStringLectura() {
+        return getCodigo()+",E,"+getRutRemitente()+","+getRutDestinatario()+","+getPeso()+","+getLargo()+","+getAncho()+","+getProf();
+    }
 }

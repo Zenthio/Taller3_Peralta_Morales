@@ -3,9 +3,9 @@ package cl.ucn.ei.pa.sistemastarkon.dominio;
 public class V extends Entrega {
 
     private String material;
-    private double peso;
+    private int peso;
 
-    public V(int codigo, String rutRemitente, String rutDestinatario, String material, double peso) {
+    public V(int codigo, String rutRemitente, String rutDestinatario, String material, int peso) {
         super(codigo, rutRemitente, rutDestinatario);
         this.material = material;
         this.peso = peso;
@@ -20,7 +20,7 @@ public class V extends Entrega {
         this.material = material;
     }
 
-    public double getPeso() {
+    public int getPeso() {
         return this.peso;
     }
 
@@ -49,4 +49,8 @@ public class V extends Entrega {
         return " Valor: "+getValor()+"\n Tipo: Valija";
     }
  
+    @Override
+    public String toStringLectura() {
+        return getCodigo()+",V,"+getRutRemitente()+","+getRutDestinatario()+","+getMaterial()+","+getPeso();
+    }
 }

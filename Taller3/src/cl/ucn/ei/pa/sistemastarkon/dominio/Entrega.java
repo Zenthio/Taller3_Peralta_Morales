@@ -6,7 +6,7 @@ public abstract class Entrega {
     //TIPO DE ENTREGA IRIA AQUI
     private String rutRemitente;
     private String rutDestinatario;
-    protected double valor;
+    protected int valor;
 
     protected Entrega(int codigo, String rutRemitente, String rutDestinatario){
         this.codigo = codigo;
@@ -41,11 +41,11 @@ public abstract class Entrega {
         this.rutDestinatario = rutDestinatario;
     }
 
-    public double getValor() {
+    public int getValor() {
         return this.valor;
     }
 
-    public void setValor(double valor) {
+    public void setValor(int valor) {
         this.valor = valor;
     }
 
@@ -56,4 +56,5 @@ public abstract class Entrega {
         return " Código: "+getCodigo()+"\n Rut Remitente: "+getRutRemitente()+"\n Rut Destinatario: "+getRutDestinatario()+"\n Valor: "+getValor();
     }
     
+    public abstract String toStringLectura();
 }

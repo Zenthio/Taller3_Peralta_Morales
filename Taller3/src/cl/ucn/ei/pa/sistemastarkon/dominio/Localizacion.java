@@ -4,7 +4,7 @@ import cl.ucn.ei.pa.sistemastarkon.logica.*;
 public class Localizacion{
 
     private String nombre;
-    private int ganancia;
+    private double ganancia;
     private ListaEntrega entregasEnviadas;
     private ListaEntrega entregasRecibidas;
 
@@ -23,16 +23,37 @@ public class Localizacion{
         this.nombre = nombre;
     }
 
-    public int getGanancia(){
+    public double getGanancia(){
         return this.ganancia;
     }
 
-    public void setGanancia(int ganancia){
+    public void setGanancia(double ganancia){
         this.ganancia = ganancia;
     }
 
     public String entregasLocalizacion(){
         String retorno = "Localizacion: \n"+getNombre()+ "realizó "+entregasEnviadas.getSize()+" y recibió "+entregasRecibidas.getSize()+"\n";
         return retorno;
+    }
+
+    public ListaEntrega getEntregasEnviadas() {
+        return this.entregasEnviadas;
+    }
+
+    public void setEntregasEnviadas(ListaEntrega entregasEnviadas) {
+        this.entregasEnviadas = entregasEnviadas;
+    }
+
+    public ListaEntrega getEntregasRecibidas() {
+        return this.entregasRecibidas;
+    }
+
+    public void setEntregasRecibidas(ListaEntrega entregasRecibidas) {
+        this.entregasRecibidas = entregasRecibidas;
+    }
+
+    @Override
+    public String toString() {
+        return getNombre();
     }
 }

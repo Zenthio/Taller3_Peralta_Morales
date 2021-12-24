@@ -1,17 +1,18 @@
 package cl.ucn.ei.pa.sistemastarkon.dominio;
 
 import cl.ucn.ei.pa.sistemastarkon.logica.*;
+import cl.ucn.ei.pa.sistemastarkon.utils.*;
 
 public class Cliente {
     private String rut;
     private String nombre;
     private String apellido;
-    private double saldo;
+    private int saldo;
     private String ciudad;
     private ListaEntrega entregasRecibidas;
     private ListaEntrega entregasEnviadas; 
 
-    public Cliente(String rut, String nombre, String apellido, double saldo, String ciudad) {
+    public Cliente(String rut, String nombre, String apellido, int saldo, String ciudad) {
         this.rut = rut;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -61,11 +62,11 @@ public class Cliente {
         this.apellido = apellido;
     }
 
-    public double getSaldo() {
+    public int getSaldo() {
         return this.saldo;
     }
 
-    public void setSaldo(double saldo) {
+    public void setSaldo(int saldo) {
         this.saldo = saldo;
     }
 
@@ -79,15 +80,7 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return "{" +
-            " rut='" + getRut() + "'" +
-            ", nombre='" + getNombre() + "'" +
-            ", apellido='" + getApellido() + "'" +
-            ", saldo='" + getSaldo() + "'" +
-            ", ciudad='" + getCiudad() + "'" +
-            ", entregasRecibidas='" + getEntregasRecibidas() + "'" +
-            ", entregasEnviadas='" + getEntregasEnviadas() + "'" +
-            "}";
+        return RutUtility.formatearRut(getRut())+","+getNombre()+","+getApellido()+","+getSaldo()+","+getCiudad();
     }
 
 }

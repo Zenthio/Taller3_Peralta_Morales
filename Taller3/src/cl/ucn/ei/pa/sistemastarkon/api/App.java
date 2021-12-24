@@ -14,38 +14,45 @@ public class App {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         SistemaStarkon sys = new SistemaStarkonImpl();
+        lecturaLocalizaciones(sys);
         lecturaClientes(sys);
-        lecutraLocalizaciones(sys);
         lecturaEntregas(sys);
+        System.out.println(sys.obtenerDatosLocalizacion() +"\n"+sys.obtenerDatosCliente()+"\n"+sys.obtenerDatosEntrega());
         menu(sys,scanner);
         
     }
 
     public static void lecturaEntregas(SistemaStarkon sys) {
         try {
-            Scanner arch = new Scanner(new File("Clientes.txt"));
+            Scanner arch = new Scanner(new File("Entregas.txt"));
             while (arch.hasNextLine()){
                 String line = arch.nextLine();
                 String[] datos = line.split(",");
                 int codigo = Integer.parseInt(datos[0]);
+                String tipo = datos[1];
                 String rutR = datos[2];
                 String rutD = datos[3];
-                if (datos.length == 6){
-                    if (datos[4].equals("Cuero") || datos[4].equals("Plastico") || datos[4].equals("Tela")){
+                if (tipo.equals("V")){                  
                         String material = datos[4];
-                        double peso = Double.parseDouble(datos[5]);
-                        sys.ingresarEntregaV(codigo, rutR, rutD, material, peso);
-                    } else {
-                        double peso = Double.parseDouble(datos[4]);
-                        double grosor = Double.parseDouble(datos[5]);
-                        sys.ingresarEntregaD(codigo, rutR, rutD, peso, grosor);
-                    }
+                        int peso = Integer.parseInt(datos[5]);
+                        if (sys.ingresarEntregaV(codigo, rutR, rutD, material, peso)){
+                            System.out.println("La entrega con código "+codigo+" se añadió correctamente");
+                        }
+                    } else if (tipo.equals("D")){
+                        int peso = Integer.parseInt(datos[4]);
+                        int grosor = Integer.parseInt(datos[5]);
+                        if (sys.ingresarEntregaD(codigo, rutR, rutD, peso, grosor)){
+                            System.out.println("La entrega con código "+codigo+" se añadió correctamente");
+                        }
+                    
                 } else {
-                    double peso = Double.parseDouble(datos[4]);
-                    double largo = Double.parseDouble(datos[5]);
-                    double ancho = Double.parseDouble(datos[6]);
-                    double prof = Double.parseDouble(datos[7]);
-                    sys.ingresarEntregaE(codigo, rutR, rutD, peso, largo, ancho, prof);
+                    int peso = Integer.parseInt(datos[4]);
+                    int largo = Integer.parseInt(datos[5]);
+                    int ancho = Integer.parseInt(datos[6]);
+                    int prof = Integer.parseInt(datos[7]);
+                    if (sys.ingresarEntregaE(codigo, rutR, rutD, peso, largo, ancho, prof)){
+                        System.out.println("La entrega con código "+codigo+" se añadió correctamente");
+                    }
                 }
             }
         } catch (IOException | NullPointerException e){
@@ -53,14 +60,16 @@ public class App {
         }
     }
 
-    public static void lecutraLocalizaciones(SistemaStarkon sys) {
+    public static void lecturaLocalizaciones(SistemaStarkon sys) {
         try {
             Scanner arch = new Scanner(new File("Localizacion.txt"));
             while (arch.hasNextLine()){
                 String line = arch.nextLine();
                 String[] datos = line.split(",");
                 String nombre = datos[0];
-                sys.ingresarLocalizacion(nombre);
+                if (sys.ingresarLocalizacion(nombre)){
+                    System.out.println("La localización "+nombre+" se añadió correctamente");
+                }
             }
         } catch (IOException | NullPointerException e){
             System.out.println(e.getMessage());
@@ -76,9 +85,11 @@ public class App {
                 String rut = datos[0];
                 String nombre = datos[1];
                 String apellido = datos[2];
-                double saldo = Double.parseDouble(datos[3]);
+                int saldo = Integer.parseInt(datos[3]);
                 String ciudad = datos[4];
-                sys.ingresarCliente(rut, nombre, apellido, saldo, ciudad);
+                if (sys.ingresarCliente(rut, nombre, apellido, saldo, ciudad)){
+                    System.out.println("El cliente con rut "+rut+" se añadió correctamente");
+                }
                 
             }
         } catch (IOException | NullPointerException e){
@@ -221,7 +232,7 @@ public class App {
     public static void escritura(SistemaStarkon sys){
         System.out.println("<==============================> ESCRITURA DE ARCHIVOS <==============================>\n");
         try {
-            BufferedWriter personajes = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("Cliente.txt")));
+            BufferedWriter personajes = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("Clientee.txt")));
             personajes.write(sys.obtenerDatosCliente());
             personajes.close();
         } catch (IOException e){ 
@@ -229,7 +240,7 @@ public class App {
         }
         
         try {
-            BufferedWriter clientes = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("Localizacion.txt")));
+            BufferedWriter clientes = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("Localizacionn.txt")));
             clientes.write(sys.obtenerDatosLocalizacion());
             clientes.close();
         } catch (IOException e){
@@ -237,7 +248,7 @@ public class App {
         }
 
         try {
-            BufferedWriter recaudacion = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("Entregas.txt")));
+            BufferedWriter recaudacion = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("Entregass.txt")));
             recaudacion.write(sys.obtenerDatosEntrega());
             recaudacion.close();
         } catch (IOException e){

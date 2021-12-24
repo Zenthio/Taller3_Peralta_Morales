@@ -11,18 +11,24 @@ public class RutUtility {
 	 * @return rut with points and a dash. 
 	 */
 	public static String formatearRut(String rut) {
-		int counter=0;
-		String format;
-		format = "-"+rut.substring(rut.length()-1);
-		for(int i = rut.length()-2;i>=0;i--) {
-			format = rut.substring(i, i+1)+format;
-			counter++;
-			if(counter == 3 && i != 0) {
-				format = "."+format;	
-				counter = 0;
-			}
-		}
-		return format;
+		int cont=0;
+        String formato;
+        if(rut.length() == 0){
+            return "";
+        }else{
+            rut = rut.replace(".", "");
+            rut = rut.replace("-", "");
+            formato = "-"+rut.substring(rut.length()-1);
+            for(int i = rut.length()-2;i>=0;i--){
+                formato = rut.substring(i, i+1)+formato;
+                cont++;
+                if(cont == 3 && i != 0){
+                    formato = "."+formato;
+                    cont = 0;
+                }
+            }
+            return formato;
+        }
 	}
 	
 	/** 
@@ -30,8 +36,8 @@ public class RutUtility {
 	 * @return String
 	 */
 	public static String quitarFormatoRut(String rut) {
-		rut = rut.replace(".", "");
-		rut = rut.replace("-", "");	
-		return rut.toLowerCase();
+		String RUTFormateado = rut.replaceAll("\\p{Punct}", "");
+        String RUTFormateado2 = RUTFormateado.toLowerCase();
+        return RUTFormateado2;
 	}
 }

@@ -8,13 +8,13 @@ public interface SistemaStarkon {
 
     public boolean ingresarLocalizacion(String nombre);
     
-    public boolean ingresarCliente(String rut, String nombre, String apellido, double saldo, String ciudad);
+    public boolean ingresarCliente(String rut, String nombre, String apellido, int saldo, String ciudad);
     
-    public boolean ingresarEntregaD(int codigo, String rutR, String rutD, double peso, double grosor);
+    public boolean ingresarEntregaD(int codigo, String rutR, String rutD, int peso, int grosor);
     
-    public boolean ingresarEntregaE(int codigo, String rutR, String rutD, double peso, double largo, double ancho, double prof);
+    public boolean ingresarEntregaE(int codigo, String rutR, String rutD, int peso, int largo, int ancho, int prof);
     
-    public boolean ingresarEntregaV(int codigo, String rutR, String rutD, String material, double peso);
+    public boolean ingresarEntregaV(int codigo, String rutR, String rutD, String material, int peso);
    
    
     //RF2 y 5
