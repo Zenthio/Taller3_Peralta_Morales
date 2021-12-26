@@ -1,5 +1,7 @@
 package cl.ucn.ei.pa.sistemastarkon.dominio;
 
+import cl.ucn.ei.pa.sistemastarkon.utils.RutUtility;
+
 public class V extends Entrega {
 
     private String material;
@@ -54,6 +56,13 @@ public class V extends Entrega {
  
     @Override
     public String toStringLectura() {
-        return getCodigo()+",V,"+getRutRemitente()+","+getRutDestinatario()+","+getMaterial()+","+getPeso();
+        String material = getMaterial();
+        String primeraletra = material.substring(0,1);
+        String resto = material.substring(1,getMaterial().length());
+        primeraletra = primeraletra.toUpperCase();
+        material = primeraletra + resto;
+        setMaterial(material);
+        
+        return getCodigo()+",V,"+RutUtility.formatearRut(getRutRemitente().toUpperCase())+","+RutUtility.formatearRut(getRutDestinatario().toUpperCase())+","+getMaterial()+","+getPeso();
     }
 }

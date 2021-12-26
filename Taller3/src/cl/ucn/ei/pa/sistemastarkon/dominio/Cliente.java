@@ -80,7 +80,7 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return RutUtility.formatearRut(getRut())+","+getNombre()+","+getApellido()+","+getSaldo()+","+getCiudad();
+        return RutUtility.formatearRut(getRut().toUpperCase())+","+getNombre()+","+getApellido()+","+getSaldo()+","+getCiudad();
     }
 
 }

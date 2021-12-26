@@ -11,14 +11,13 @@ import cl.ucn.ei.pa.sistemastarkon.logica.*;
 import cl.ucn.ei.pa.sistemastarkon.utils.RutUtility;
 
 public class App {
-    //QUEDA ARREGLAR LAS GANANCIAS Y EL ENTREGASCLIENTE, ADEMAS DE SEGUIR PROBANDO LOS METODOS
+    //VER MANERA DE ARREGLAR GANANCIAS, Y DEJAR MÁS ESTETICO EL DESPLEGARCLIENTES
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         SistemaStarkon sys = new SistemaStarkonImpl();
         lecturaLocalizaciones(sys);
         lecturaClientes(sys);
         lecturaEntregas(sys);
-        System.out.println(sys.obtenerDatosLocalizacion() +"\n"+sys.obtenerDatosCliente()+"\n"+sys.obtenerDatosEntrega());
         menu(sys,scanner);
     }
 
@@ -37,15 +36,12 @@ public class App {
                 if (tipo.equals("V")){                  
                     String material = datos[4];
                     int peso = Integer.parseInt(datos[5]);
-                    System.out.println("Material: "+material+", Peso: "+peso);
                     sys.ingresarEntregaV(codigo, rutR, rutD, material, peso);
-                    System.out.println("La entrega con código "+codigo+" se añadió correctamente");
                         
                 } else if (tipo.equals("D")){
                     int peso = Integer.parseInt(datos[4]);
                     int grosor = Integer.parseInt(datos[5]);
                     sys.ingresarEntregaD(codigo, rutR, rutD, peso, grosor);
-                    System.out.println("La entrega con código "+codigo+" se añadió correctamente");
                         
                     
                 } else {
@@ -54,7 +50,6 @@ public class App {
                     int ancho = Integer.parseInt(datos[6]);
                     int prof = Integer.parseInt(datos[7]);
                     sys.ingresarEntregaE(codigo, rutR, rutD, peso, largo, ancho, prof);
-                    System.out.println("La entrega con código "+codigo+" se añadió correctamente");
                     
                 }
             }
@@ -73,7 +68,6 @@ public class App {
                 String[] datos = line.split(",");
                 String nombre = datos[0];
                 sys.ingresarLocalizacion(nombre);
-                    System.out.println("La localización "+nombre+" se añadió correctamente");
                 
             }
         } catch (IOException | NullPointerException e){
@@ -94,7 +88,6 @@ public class App {
                 int saldo = Integer.parseInt(datos[3]);
                 String ciudad = datos[4];
                 sys.ingresarCliente(rut, nombre, apellido, saldo, ciudad);
-                    System.out.println("El cliente con rut "+rut+" se añadió correctamente");
                 
                 
             }
@@ -240,7 +233,7 @@ public class App {
     public static void escritura(SistemaStarkon sys){
         System.out.println("<==============================> ESCRITURA DE ARCHIVOS <==============================>\n");
         try {
-            BufferedWriter personajes = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("Clientee.txt")));
+            BufferedWriter personajes = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("Cliente.txt")));
             personajes.write(sys.obtenerDatosCliente());
             personajes.close();
         } catch (IOException e){ 
@@ -248,7 +241,7 @@ public class App {
         }
         
         try {
-            BufferedWriter clientes = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("Localizacionn.txt")));
+            BufferedWriter clientes = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("Localizacion.txt")));
             clientes.write(sys.obtenerDatosLocalizacion());
             clientes.close();
         } catch (IOException e){
@@ -256,7 +249,7 @@ public class App {
         }
 
         try {
-            BufferedWriter recaudacion = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("Entregass.txt")));
+            BufferedWriter recaudacion = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("Entregas.txt")));
             recaudacion.write(sys.obtenerDatosEntrega());
             recaudacion.close();
         } catch (IOException e){

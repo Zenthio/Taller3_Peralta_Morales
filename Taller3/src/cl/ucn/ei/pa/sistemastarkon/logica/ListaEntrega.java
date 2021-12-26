@@ -9,7 +9,6 @@ public class ListaEntrega {
 
     public ListaEntrega(){
         first = null;
-        
         size = 0;
     }
 
@@ -180,11 +179,16 @@ public class ListaEntrega {
     public String entregas(){
         NodoEntrega current = first;
         String retorno = "";
-        do{
-            Entrega e = current.getEntrega();
-            retorno += e.toString()+"\n";
-            current = current.getNext();
-        } while (current != first);
+        if (!isEmpty()){
+            do{
+                System.out.println(current.getEntrega().getCodigo());
+                Entrega e = current.getEntrega();
+                retorno += e.toString()+"\n";
+                current = current.getNext();
+            } while (current != first);
+        } else {
+            retorno = "\nNo existen entregas en esta lista para esta persona\n\n";
+        }
         return retorno;
     }
 

@@ -1,5 +1,7 @@
 package cl.ucn.ei.pa.sistemastarkon.dominio;
 
+import cl.ucn.ei.pa.sistemastarkon.utils.*;
+
 public class D extends Entrega{
     
     private int peso;
@@ -45,6 +47,6 @@ public class D extends Entrega{
 
     @Override
     public String toStringLectura() {
-        return getCodigo()+",D,"+getRutRemitente()+","+getRutDestinatario()+","+getPeso()+","+getGrosor();
+        return getCodigo()+",D,"+RutUtility.formatearRut(getRutRemitente().toUpperCase())+","+RutUtility.formatearRut(getRutDestinatario().toUpperCase())+","+getPeso()+","+getGrosor();
     }
 }
