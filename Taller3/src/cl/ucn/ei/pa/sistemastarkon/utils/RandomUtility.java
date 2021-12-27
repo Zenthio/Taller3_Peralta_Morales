@@ -6,6 +6,11 @@ public class RandomUtility {
 
     public RandomUtility(){}
 
+    
+    /** 
+     * @param largo
+     * @return String
+     */
     public static String obtenerCodigoAleatorio(int largo){
         int nRandom;
         String codigoR = "";

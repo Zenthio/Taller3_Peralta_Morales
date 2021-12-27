@@ -8,13 +8,13 @@ public interface SistemaStarkon {
 
     public void ingresarLocalizacion(String nombre);
     
-    public void ingresarCliente(String rut, String nombre, String apellido, int saldo, String ciudad);
+    public void ingresarCliente(String rut, String nombre, String apellido, double saldo, String ciudad);
     
-    public void ingresarEntregaD(int codigo, String rutR, String rutD, int peso, int grosor);
+    public void ingresarEntregaD(int codigo, String rutR, String rutD, double peso, double grosor);
     
-    public void ingresarEntregaE(int codigo, String rutR, String rutD, int peso, int largo, int ancho, int prof);
+    public void ingresarEntregaE(int codigo, String rutR, String rutD, double peso, double largo, double ancho, double prof);
     
-    public void ingresarEntregaV(int codigo, String rutR, String rutD, String material, int peso);
+    public void ingresarEntregaV(int codigo, String rutR, String rutD, String material, double peso);
    
    
     //RF2 y 5
@@ -34,7 +34,7 @@ public interface SistemaStarkon {
 
     public boolean EntregaV();
 
-    public boolean pagarEntrega(Entrega e);
+    public boolean pagarEntrega(Entrega e, Cliente destinatario);
 
     public boolean recargarSaldo();
 

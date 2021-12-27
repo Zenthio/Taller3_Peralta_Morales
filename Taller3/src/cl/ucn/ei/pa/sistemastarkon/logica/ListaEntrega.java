@@ -12,25 +12,49 @@ public class ListaEntrega {
         size = 0;
     }
 
+    
+    /** 
+     * @return NodoEntrega
+     */
     public NodoEntrega getFirst() {
         return this.first;
     }
 
+    
+    /** 
+     * @param first
+     */
     public void setFirst(NodoEntrega first) {
         this.first = first;
     }
 
+    
+    /** 
+     * @return int
+     */
     public int getSize() {
         return this.size;
     }
 
+    
+    /** 
+     * @param size
+     */
     public void setSize(int size) {
         this.size = size;
     }
 
+    
+    /** 
+     * @return boolean
+     */
     public boolean isEmpty(){
         return first==null;
     }
+    
+    /** 
+     * @return boolean
+     */
     /*
     public boolean insertarPrimer(Entrega e){ 
         NodoEntrega nuevoNodo = new NodoEntrega(e);
@@ -125,6 +149,11 @@ public class ListaEntrega {
         return true;
     }
 
+    
+    /** 
+     * @param rut
+     * @return Entrega
+     */
     public Entrega buscarNodoR(String rut){
         NodoEntrega current = first;
         do{
@@ -137,6 +166,11 @@ public class ListaEntrega {
 
     }
 
+    
+    /** 
+     * @param codigo
+     * @return Entrega
+     */
     public Entrega buscarNodoC(int codigo){
         NodoEntrega current = first;
         
@@ -150,6 +184,11 @@ public class ListaEntrega {
 
     }
 
+    
+    /** 
+     * @param codigo
+     * @return int
+     */
     public int buscarNodoI(int codigo){
         NodoEntrega current = first;
         int pos = 0;
@@ -163,6 +202,11 @@ public class ListaEntrega {
         return -1;
     }
 
+    
+    /** 
+     * @param pos
+     * @return Entrega
+     */
     public Entrega buscarINodo(int pos){
         NodoEntrega current = first;
         int cont = 0;
@@ -176,6 +220,10 @@ public class ListaEntrega {
         return null;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String entregas(){
         NodoEntrega current = first;
         String retorno = "";
@@ -192,6 +240,10 @@ public class ListaEntrega {
         return retorno;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String entregasTipo(){
         NodoEntrega current = first;
         String retorno = "";

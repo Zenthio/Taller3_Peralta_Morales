@@ -11,7 +11,6 @@ import cl.ucn.ei.pa.sistemastarkon.logica.*;
 import cl.ucn.ei.pa.sistemastarkon.utils.RutUtility;
 
 public class App {
-    //VER MANERA DE ARREGLAR GANANCIAS, Y DEJAR MÁS ESTETICO EL DESPLEGARCLIENTES
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         SistemaStarkon sys = new SistemaStarkonImpl();
@@ -35,20 +34,20 @@ public class App {
                 rutD = RutUtility.quitarFormatoRut(rutD);
                 if (tipo.equals("V")){                  
                     String material = datos[4];
-                    int peso = Integer.parseInt(datos[5]);
+                    double peso = Double.parseDouble(datos[5]);
                     sys.ingresarEntregaV(codigo, rutR, rutD, material, peso);
                         
                 } else if (tipo.equals("D")){
-                    int peso = Integer.parseInt(datos[4]);
-                    int grosor = Integer.parseInt(datos[5]);
+                    double peso = Double.parseDouble(datos[4]);
+                    double grosor = Double.parseDouble(datos[5]);
                     sys.ingresarEntregaD(codigo, rutR, rutD, peso, grosor);
                         
                     
                 } else {
-                    int peso = Integer.parseInt(datos[4]);
-                    int largo = Integer.parseInt(datos[5]);
-                    int ancho = Integer.parseInt(datos[6]);
-                    int prof = Integer.parseInt(datos[7]);
+                    double peso = Double.parseDouble(datos[4]);
+                    double largo = Double.parseDouble(datos[5]);
+                    double ancho = Double.parseDouble(datos[6]);
+                    double prof = Double.parseDouble(datos[7]);
                     sys.ingresarEntregaE(codigo, rutR, rutD, peso, largo, ancho, prof);
                     
                 }

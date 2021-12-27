@@ -4,39 +4,35 @@ import cl.ucn.ei.pa.sistemastarkon.utils.*;
 
 public class D extends Entrega{
     
-    private int peso;
-    private double pesoKg;
-    private int grosor;
-    private double grosorCm;
+    private double peso;
+    private double grosor;
 
-    public D(int codigo, String rutRemitente, String rutDestinatario, int peso, int grosor){
+    public D(int codigo, String rutRemitente, String rutDestinatario, double peso, double grosor){
         super(codigo, rutRemitente, rutDestinatario);
         this.peso = peso;
-        this.pesoKg = (peso/1000);
         this.grosor = grosor;
-        this.grosorCm = (grosor/10);
         calcularValor();
     }
 
-    public int getPeso() {
+    public double getPeso() {
         return this.peso;
     }
 
-    public void setPeso(int peso) {
+    public void setPeso(double peso) {
         this.peso = peso;
     }
 
-    public int getGrosor() {
+    public double getGrosor() {
         return this.grosor;
     }
 
-    public void setGrosor(int grosor) {
+    public void setGrosor(double grosor) {
         this.grosor = grosor;
     }
 
     @Override
     public double calcularValor() {
-        this.valor = (pesoKg)*(grosorCm)*100;
+        this.valor = (peso/1000)*(grosor/10)*100;
         return valor;
     }
 
@@ -47,6 +43,8 @@ public class D extends Entrega{
 
     @Override
     public String toStringLectura() {
-        return getCodigo()+",D,"+RutUtility.formatearRut(getRutRemitente().toUpperCase())+","+RutUtility.formatearRut(getRutDestinatario().toUpperCase())+","+getPeso()+","+getGrosor();
+        int pesoL = (int) Math.round(peso);
+        int grosorL = (int) Math.round(grosor);
+        return getCodigo()+",D,"+RutUtility.formatearRut(getRutRemitente().toUpperCase())+","+RutUtility.formatearRut(getRutDestinatario().toUpperCase())+","+pesoL+","+grosorL;
     }
 }

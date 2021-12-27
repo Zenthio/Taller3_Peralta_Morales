@@ -14,42 +14,88 @@ public abstract class Entrega {
         this.rutDestinatario = rutDestinatario;
     }
 
+    
+    /** 
+     * @param getCodigo(
+     * @return double
+     */
     public abstract double calcularValor();
 
+    
+    /** 
+     * @return int
+     */
     public int getCodigo() {
         return this.codigo;
     }
 
+    
+    /** 
+     * @param codigo
+     */
     public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getRutRemitente() {
         return this.rutRemitente;
     }
 
+    
+    /** 
+     * @param rutRemitente
+     */
     public void setRutRemitente(String rutRemitente) {
         this.rutRemitente = rutRemitente;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getRutDestinatario() {
         return this.rutDestinatario;
     }
 
+    
+    /** 
+     * @param rutDestinatario
+     */
     public void setRutDestinatario(String rutDestinatario) {
         this.rutDestinatario = rutDestinatario;
     }
 
+    
+    /** 
+     * @return double
+     */
     public double getValor() {
         return this.valor;
     }
 
+    
+    /** 
+     * @param valor
+     */
     public void setValor(double valor) {
         this.valor = valor;
     }
 
+    
+    /** 
+     * @param toString(
+     * @return String
+     */
     public abstract String toStringHija();
 
+    
+    /** 
+     * @return String
+     */
     @Override
     public String toString() {
         return " Código: "+getCodigo()+"\n Rut Remitente: "+getRutRemitente()+"\n Rut Destinatario: "+getRutDestinatario()+"\n Valor: "+getValor()+"\n";

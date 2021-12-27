@@ -22,10 +22,18 @@ public class SistemaStarkonImpl implements SistemaStarkon{
         this.listaC = new LinkedList<Cliente>();
     }
 
+    
+    /** 
+     * @return int
+     */
     public int getPrivilegio(){
         return this.privilegio;
     }
     
+    
+    /** 
+     * @return boolean
+     */
     @Override
     public boolean iniciarSesion() {
         System.out.println("<==============================> INICIO DE SESIÓN <==============================>\n[1] Iniciar Sesión\n[2] Registrarse\n[3] Salir");
@@ -83,6 +91,10 @@ public class SistemaStarkonImpl implements SistemaStarkon{
         
     }
 
+    
+    /** 
+     * @return boolean
+     */
     @Override
     public boolean registrarCuenta(){
         System.out.println("<==============================> REGISTRO CUENTA <==============================>\n");
@@ -115,24 +127,44 @@ public class SistemaStarkonImpl implements SistemaStarkon{
         return false;
     }
 
+    
+    /** 
+     * @param nombre
+     */
     @Override
     public void ingresarLocalizacion(String nombre) {
         Localizacion localizacion = new Localizacion(nombre);
         listaL.add(localizacion);
     }
 
+    
+    /** 
+     * @param rut
+     * @param nombre
+     * @param apellido
+     * @param saldo
+     * @param ciudad
+     */
     @Override
-    public void ingresarCliente(String rut, String nombre, String apellido, int saldo, String ciudad) {
+    public void ingresarCliente(String rut, String nombre, String apellido, double saldo, String ciudad) {
         Cliente cliente = new Cliente(rut,nombre,apellido,saldo,ciudad);
         listaC.add(cliente);
     }
+    
+    /** 
+     * @param codigo
+     * @param rutR
+     * @param rutD
+     * @param peso
+     * @param grosor
+     */
     /*
     EVITAR ITERACIONES INNECESARIAS
     */
 
 
     @Override
-    public void ingresarEntregaD(int codigo, String rutR, String rutD, int peso, int grosor) {
+    public void ingresarEntregaD(int codigo, String rutR, String rutD, double peso, double grosor) {
         Entrega e = new D(codigo,rutR,rutD,peso,grosor);
         Iterator<Cliente> itC = listaC.iterator();
         int cont = 0;
@@ -175,8 +207,18 @@ public class SistemaStarkonImpl implements SistemaStarkon{
             throw new NullPointerException("La entrega con código "+codigo+" no pudo ser ingresada al sistema");
         }
     }
+    
+    /** 
+     * @param codigo
+     * @param rutR
+     * @param rutD
+     * @param peso
+     * @param largo
+     * @param ancho
+     * @param prof
+     */
     @Override
-    public void ingresarEntregaE(int codigo, String rutR, String rutD, int peso, int largo, int ancho, int prof) {
+    public void ingresarEntregaE(int codigo, String rutR, String rutD, double peso, double largo, double ancho, double prof) {
         Entrega e = new E(codigo,rutR,rutD,peso,largo,ancho,prof);
         Iterator<Cliente> itC = listaC.iterator();
         int cont = 0;
@@ -220,8 +262,16 @@ public class SistemaStarkonImpl implements SistemaStarkon{
             throw new NullPointerException("La entrega con código "+codigo+" no pudo ser ingresada al sistema");
         }
     }
+    
+    /** 
+     * @param codigo
+     * @param rutR
+     * @param rutD
+     * @param material
+     * @param peso
+     */
     @Override
-    public void ingresarEntregaV(int codigo, String rutR, String rutD, String material, int peso) {
+    public void ingresarEntregaV(int codigo, String rutR, String rutD, String material, double peso) {
         Entrega e = new V(codigo,rutR,rutD,material,peso);
         Iterator<Cliente> itC = listaC.iterator();
         int cont = 0;
@@ -283,15 +333,19 @@ public class SistemaStarkonImpl implements SistemaStarkon{
         }
     }
 
+    
+    /** 
+     * @return boolean
+     */
     @Override
     public boolean EntregaD(){
         System.out.print("Ingrese peso (en gramos): ");
-            int peso = Integer.parseInt(scanner.nextLine());
+            double peso = Double.parseDouble(scanner.nextLine());
             if (0 > peso || peso > 1500){
                 throw new NullPointerException("El peso es mayor al máximo, o es negativo");
             } else {
                 System.out.print("Ingrese grosor (en milimetros): ");
-                int grosor = Integer.parseInt(scanner.nextLine());
+                double grosor = Double.parseDouble(scanner.nextLine());
                 if (0 > grosor || grosor > 50){
                     throw new NullPointerException("El grosor es mayor al máximo, o es negativo");
                 } else {
@@ -309,13 +363,14 @@ public class SistemaStarkonImpl implements SistemaStarkon{
                         while (itC.hasNext()){
                             Cliente cliente = itC.next();
                             if (cliente.getRut().equals(rutD)){
+                                Cliente destinatario = cliente;
                                 String codigoAleatorio = RandomUtility.obtenerCodigoAleatorio(6);
                                 int codigoAleatorio2 = Integer.parseInt(codigoAleatorio);
                                 while (true){
                                     if (listaE.buscarNodoC(codigoAleatorio2) == null){
                                         Entrega e = new D(codigoAleatorio2,rutR,rutD,peso,grosor);
                                         encontrado = true;
-                                        return pagarEntrega(e);
+                                        return pagarEntrega(e,destinatario);
                                     }
                                     codigoAleatorio = RandomUtility.obtenerCodigoAleatorio(6);
                                     codigoAleatorio2 = Integer.parseInt(codigoAleatorio);
@@ -331,25 +386,29 @@ public class SistemaStarkonImpl implements SistemaStarkon{
          return false;
     }
     
+    
+    /** 
+     * @return boolean
+     */
     @Override
     public boolean EntregaE() {
         System.out.print("Ingrese peso (en gramos): ");
-        int peso = Integer.parseInt(scanner.nextLine());
+        Double peso = Double.parseDouble(scanner.nextLine());
         if (peso > 50000 || peso < 0){
             throw new NullPointerException("El peso es mayor al máximo, o es negativo");
         } else {
             System.out.print("Ingrese largo (en milimetros): ");
-            int largo = Integer.parseInt(scanner.nextLine());
+            Double largo = Double.parseDouble(scanner.nextLine());
             if (0 > largo || largo > 120){
                 throw new NullPointerException("El largo es mayor al máximo, o es negativo");
             } else {
                 System.out.print("Ingrese ancho (en milimetros): ");
-                int ancho = Integer.parseInt(scanner.nextLine());
+                Double ancho = Double.parseDouble(scanner.nextLine());
                 if (0 > ancho || ancho > 80 ){
                     throw new NullPointerException("El ancho es mayor al máximo, o es negativo");
                 } else {
                     System.out.print("Ingrese profundidad (en milimetros): ");
-                    int prof = Integer.parseInt(scanner.nextLine());
+                    Double prof = Double.parseDouble(scanner.nextLine());
                     if (0 > prof || prof > 80){
                         throw new NullPointerException("La profundidad es mayor al maximo, o es negativa");
                     } else {
@@ -367,13 +426,14 @@ public class SistemaStarkonImpl implements SistemaStarkon{
                             while (itC.hasNext()){
                                 Cliente cliente = itC.next();
                                 if (cliente.getRut().equals(rutD)){
+                                    Cliente destinatario = cliente;
                                     String codigoAleatorio = RandomUtility.obtenerCodigoAleatorio(6);
                                     int codigoAleatorio2 = Integer.parseInt(codigoAleatorio);
                                     while (true){
                                         if (listaE.buscarNodoC(codigoAleatorio2) == null){
                                             Entrega e = new E(codigoAleatorio2,rutR,rutD,peso,largo,ancho,prof);
                                             encontrado = true;
-                                            return pagarEntrega(e);
+                                            return pagarEntrega(e,destinatario);
                                         }
                                         codigoAleatorio = RandomUtility.obtenerCodigoAleatorio(6);
                                         codigoAleatorio2 = Integer.parseInt(codigoAleatorio);
@@ -391,13 +451,17 @@ public class SistemaStarkonImpl implements SistemaStarkon{
         return false;
     }
 
+    
+    /** 
+     * @return boolean
+     */
     @Override
     public boolean EntregaV() {
         System.out.print("Ingrese material: ");
         String material = scanner.nextLine();
         if (material.equals("cuero") || material.equals("plastico") || material.equals("tela")) {
             System.out.print("Ingrese peso (en gramos): ");
-            int peso = Integer.parseInt(scanner.nextLine());
+            double peso = Double.parseDouble(scanner.nextLine());
             if (0 > peso || peso > 2000){
                 throw new NullPointerException("El peso es mayor al máximo, o es negativo");
             } else {
@@ -415,13 +479,14 @@ public class SistemaStarkonImpl implements SistemaStarkon{
                     while (it.hasNext()){
                         Cliente clienteFor = (Cliente) it.next();
                         if (clienteFor.getRut().equals(rutD)){
+                            Cliente destinatario = clienteFor;
                             String codigoAleatorio = RandomUtility.obtenerCodigoAleatorio(6);
                             int codigoAleatorio2 = Integer.parseInt(codigoAleatorio);
                             while (true){
                                 if (listaE.buscarNodoC(codigoAleatorio2) == null){
                                     Entrega e = new V(codigoAleatorio2,rutR,rutD,material,peso);
                                     encontrado = true;
-                                    return pagarEntrega(e);
+                                    return pagarEntrega(e,destinatario);
                                 }
                                 codigoAleatorio = RandomUtility.obtenerCodigoAleatorio(6);
                                 codigoAleatorio2 = Integer.parseInt(codigoAleatorio);
@@ -441,8 +506,14 @@ public class SistemaStarkonImpl implements SistemaStarkon{
         return false;
     }
 
+    
+    /** 
+     * @param e
+     * @param destinatario
+     * @return boolean
+     */
     @Override
-    public boolean pagarEntrega(Entrega e) {
+    public boolean pagarEntrega(Entrega e, Cliente destinatario) {
         double valor = e.getValor();
         int valorI = (int) Math.round(valor);
         Iterator<Localizacion> itL = listaL.iterator();
@@ -454,6 +525,8 @@ public class SistemaStarkonImpl implements SistemaStarkon{
                 if (this.c.getSaldo() > valor){
                     listaE.ingresarNodo(e);
                     this.c.setSaldo(c.getSaldo()-valorI);
+                    this.c.getEntregasEnviadas().ingresarNodo(e);
+                    destinatario.getEntregasRecibidas().ingresarNodo(e);
                     System.out.println("Se completó la entrega.\n");
                     System.out.println("<================================================================================>\n                                        |\n                                        ▼");
                     return true;
@@ -464,7 +537,7 @@ public class SistemaStarkonImpl implements SistemaStarkon{
                     int opcion = Integer.parseInt(scanner.nextLine());
                     if (opcion == 1){
                         recargarSaldo();
-                        pagarEntrega(e);
+                        pagarEntrega(e,destinatario);
                     } else if(opcion == 2){
                         return false;
 
@@ -483,6 +556,10 @@ public class SistemaStarkonImpl implements SistemaStarkon{
         return false;
     }
     
+    
+    /** 
+     * @return boolean
+     */
     @Override
     public boolean recargarSaldo() {
         System.out.print("Ingrese monto a recargar: ");
@@ -496,6 +573,10 @@ public class SistemaStarkonImpl implements SistemaStarkon{
         }
     }
     
+    
+    /** 
+     * @return String
+     */
     @Override
     public String verEntregas() {
         System.out.println("<==============================> DESPLIEGUE ENTREGAS <==============================>\n");
@@ -516,12 +597,20 @@ public class SistemaStarkonImpl implements SistemaStarkon{
         return retorno;
     }
     
+    
+    /** 
+     * @return String
+     */
     @Override
     public String entregasTipo() {
         System.out.println("<==============================> DESPLIEGUE ENTREGAS POR TIPO <==============================>\n");
         return listaE.entregasTipo();
     }
     
+    
+    /** 
+     * @return String
+     */
     @Override
     public String entregasLocalizacion() {
         System.out.println("<==============================> DESPLIEGUE ENTREGAS POR LOCALIZACION <==============================>\n");
@@ -535,6 +624,10 @@ public class SistemaStarkonImpl implements SistemaStarkon{
         return retorno;
     }
     
+    
+    /** 
+     * @return String
+     */
     @Override
     public String entregasCliente() {
         System.out.println("<==============================> DESPLIEGUE ENTREGAS DE CUENTAS <==============================>\n");
@@ -557,6 +650,10 @@ public class SistemaStarkonImpl implements SistemaStarkon{
         return retorno;
     }
     
+    
+    /** 
+     * @return String
+     */
     @Override
     public String registroGanancias() {
         System.out.println("<==============================> REGISTRO DE GANANCIAS <==============================>\n");
@@ -573,6 +670,10 @@ public class SistemaStarkonImpl implements SistemaStarkon{
         return retorno;
     }
 
+    
+    /** 
+     * @return String
+     */
     @Override
     public String obtenerDatosCliente() {
         String retorno = "";
@@ -590,6 +691,10 @@ public class SistemaStarkonImpl implements SistemaStarkon{
         return retorno;
     }
 
+    
+    /** 
+     * @return String
+     */
     @Override
     public String obtenerDatosLocalizacion() {
         String retorno = "";
@@ -607,6 +712,10 @@ public class SistemaStarkonImpl implements SistemaStarkon{
         return retorno;
     }
 
+    
+    /** 
+     * @return String
+     */
     @Override
     public String obtenerDatosEntrega() {
         String retorno = "";
